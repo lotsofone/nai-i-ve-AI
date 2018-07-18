@@ -1,10 +1,6 @@
 import PIL.Image
-def loadimage(path):
-    image = PIL.Image.open(path)
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-    return image;
+import base
 
 
 
-print("main here")
+print(base.predict("dwad"))
