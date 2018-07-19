@@ -10,6 +10,8 @@ def loadimage(path):
         image = image.convert("RGB")
     return image;
 
+
+
 def predict(path):
     return types[random.randint(0, 20)]
 
