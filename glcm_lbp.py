@@ -43,7 +43,7 @@ def energy(L):
 #灰度共生矩阵的熵
 #传入矩阵
 def entrop(L):
-	print(L)
+	#print(L)
 	step1=np.log2(L)
 	tag=np.isinf(step1)
 	step1[tag]=0 
@@ -88,10 +88,19 @@ def LBP(img):
 
 
 
+def g_l_feature(img):
+	img=cv2.resize(img, (64,64))
+	mp={}
+	tmp=glcm (img, 0, 1)
+	eng=energy(tmp)
+	entro=entrop(tmp)
+	lbp=LBP(img)
+	mp['energy']=eng
+	mp['entrop']=entro
+	mp['lbp']=lbp
+	return mp
 
 im=np.array(Image.open("C:\\Users\\asus-pc\\Desktop\\10.jpg").convert('L'))
 im=cv2.resize(im,(64,64))
-ret=glcm(im, 0, 1)
-energy(ret)
-aa=entrop(ret)
+g_l_feature(im)
 
