@@ -100,7 +100,7 @@ def g_l_feature(img):
 	mp['lbp']=lbp
 	return mp
 
-im=np.array(Image.open("C:\\Users\\asus-pc\\Desktop\\10.jpg").convert('L'))
-im=cv2.resize(im,(64,64))
-g_l_feature(im)
+#im=np.array(Image.open("C:\\Users\\asus-pc\\Desktop\\10.jpg").convert('L'))
+#im=cv2.resize(im,(64,64))
+#g_l_feature(im)
 

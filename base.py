@@ -28,3 +28,4 @@ def predict(path):
 
 def train(path, type):
     return
+
