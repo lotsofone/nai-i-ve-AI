@@ -4,7 +4,7 @@ import numpy
 import img_factors
 import glcm_lbp
 
-types = ['bear','bird','car','cow','elk','fox','giraffe','horse','koala','lion','monkey','plane','puppy','sheep','statue','tiger','tower','train','whale','zebra']
+types = ['bear','bicycle','bird','car','cow','elk','fox','giraffe','horse','koala','lion','monkey','plane','puppy','sheep','statue','tiger','tower','train','whale','zebra']
 
 def loadimage(path):
     image = PIL.Image.open(path)
@@ -24,7 +24,8 @@ def feature(img):
 
 
 def predict(path):
-    return types[random.randint(0, 20)]
+    return types[random.randint(0, 21)]
 
 def train(path, type):
     return
+

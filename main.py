@@ -5,6 +5,7 @@ import numpy
 import skimage
 import matplotlib.pyplot
 import glcm_lbp
+import featurePCA
 import csv
 import os
 import pandas
@@ -49,17 +50,6 @@ def pic(path):
 				#data.to_csv("C:\\Users\\asus-pc\\Documents\\GitHub\\nai-i-ve-AI\\"+dir+".csv")
 
 
-numpy.set_printoptions(threshold = 1e6)
-pic("D:\\ds2018")
-
-"""
-img = numpy.array(base.loadimage("C:\\Users\\asus-pc\\Desktop\\10.jpg"))
-img = (skimage.color.rgb2gray(img)*255).astype(numpy.uint8)
-gg = img_factors.histogramGray(img)
-print(img_factors.histStats(gg))
-
-
-matplotlib.pyplot.plot(numpy.arange(256),gg , color="#FF0000")
-matplotlib.pyplot.show()
-print(base.predict("dwad"))
-"""
+#numpy.set_printoptions(threshold = 1e6)
+#pic("D:\\ds2018")
+featurePCA.loaddataset()
