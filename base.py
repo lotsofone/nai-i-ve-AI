@@ -3,6 +3,7 @@ import PIL.Image
 import numpy
 import img_factors
 import glcm_lbp
+import featurePCA
 
 types = ['bear','bicycle','bird','car','cow','elk','fox','giraffe','horse','koala','lion','monkey','plane','puppy','sheep','statue','tiger','tower','train','whale','zebra']
 
@@ -18,7 +19,8 @@ def feature(img):
 	fea1=img_factors.histStats(gg)
 	fea2=glcm_lbp.g_l_feature(img)
 	fea=list(fea1.values())
-	fea.append(list(fea2.values()))
+	fea.extend(fea2)
+	featurePCA.flattenToArray(fea)
 	return fea
 	#print(fea)
 

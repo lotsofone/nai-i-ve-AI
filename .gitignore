@@ -11,4 +11,10 @@ tower.pkl
 train.pkl
 whale.pkl
 zebra.pkl
+pca.pkl
+dataarrays.pkl
+set.pkl
+SVM.pkl
+test_features.pkl
+test_features_answer.pkl
 
