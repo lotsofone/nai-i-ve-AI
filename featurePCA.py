@@ -19,6 +19,7 @@ def flattenToArray(l):
     return newlist
 
 
+
 def loaddataset():
     sourceRootDir = "p1 features"
     destRootDir = "p2 PCA feature"
@@ -29,7 +30,10 @@ def loaddataset():
             loadeddata = pickle.load(sourceFile)
             for i in range(len(loadeddata)):
                 loadeddata[i] = flattenToArray(loadeddata[i])
-                Yset.append(filename)
+                if(filename=='koala.pkl'):
+                    Yset.append(1)
+                else:
+                    Yset.append(0)
             dataarrays.extend(loadeddata)
 
     print(len(dataarrays[0]))
@@ -39,5 +43,13 @@ def loaddataset():
     print("fitdone")
     print(pca.explained_variance_ratio_)
     print(pca.singular_values_)
-    print(len(pca.explained_variance_ratio_))
-    print(len(pca.singular_values_))
+    right = 0
+    for i in range(len(Yset)):
+        if Yset[i]==1:
+            right = pca.transform([dataarrays[i]])
+            wrong = pca.transform([dataarrays[i-2]])
+    print("\n")
+    print(numpy.vdot(right,pca.explained_variance_ratio_))
+    print(numpy.vdot(wrong,pca.explained_variance_ratio_))
+    print(numpy.vdot(right,pca.singular_values_))
+    print(numpy.vdot(wrong,pca.singular_values_))
