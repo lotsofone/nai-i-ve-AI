@@ -4,4 +4,10 @@ features
 features_new
 features_binary
 p1 features
+pca.pkl
+dataarrays.pkl
+set.pkl
+SVM.pkl
+test_features.pkl
+test_features_answer.pkl
 
