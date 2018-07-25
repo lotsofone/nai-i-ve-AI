@@ -4,6 +4,8 @@ import csv
 import numpy
 import sklearn.decomposition.pca
 import pickle
+from sklearn.externals import joblib
+import math
 
 
 def flattenToArray(l):
@@ -19,37 +21,74 @@ def flattenToArray(l):
     return newlist
 
 
+def meaningful(dataset):
+    avg = numpy.zeros(dataset.shape[1])
+    for i in range(len(avg)):
+        avg[i] = numpy.sum(dataset[:,i])
+    avg/=dataset.shape[0]
+    dataset = dataset - [avg]
+
+    miu = numpy.zeros(dataset.shape[1])
+    for i in range(len(miu)):
+        miu[i] = numpy.var(dataset[:,i])
+        if miu[i]==0:
+            miu[i]=1
+        else:
+            miu[i] = math.sqrt(miu[i])
+    dataset = dataset / [miu]
+
+    return dataset
+
 
 def loaddataset():
     sourceRootDir = "p1 features"
     destRootDir = "p2 PCA feature"
     dataarrays = []
     Yset = []
+    print("reading")
     for filename in os.listdir(sourceRootDir):
         with open(os.path.join(sourceRootDir, filename), 'rb') as sourceFile:
             loadeddata = pickle.load(sourceFile)
             for i in range(len(loadeddata)):
                 loadeddata[i] = flattenToArray(loadeddata[i])
-                if(filename=='koala.pkl'):
-                    Yset.append(1)
-                else:
-                    Yset.append(0)
+                Yset.append(filename[0:-4])
             dataarrays.extend(loadeddata)
+            #print(loadeddata)
 
+    #print(len(dataarrays[0]))
+    pca = sklearn.decomposition.pca.PCA(n_components=1000, copy=False)
+    #pca = sklearn.decomposition.pca.PCA(copy=True)
+    print(len(dataarrays))
     print(len(dataarrays[0]))
-    pca = sklearn.decomposition.pca.PCA()
+    print(len(dataarrays[1]))
     print("fitting")
-    pca.fit(dataarrays, Yset)
+    pca.fit(dataarrays) 
     print("fitdone")
     print(pca.explained_variance_ratio_)
     print(pca.singular_values_)
-    right = 0
-    for i in range(len(Yset)):
-        if Yset[i]==1:
-            right = pca.transform([dataarrays[i]])
-            wrong = pca.transform([dataarrays[i-2]])
-    print("\n")
-    print(numpy.vdot(right,pca.explained_variance_ratio_))
-    print(numpy.vdot(wrong,pca.explained_variance_ratio_))
-    print(numpy.vdot(right,pca.singular_values_))
-    print(numpy.vdot(wrong,pca.singular_values_))
+
+    print(len(pca.explained_variance_ratio_))
+    print(len(pca.singular_values_))
+
+    #save pca
+
+    joblib.dump(pca,"pca.pkl")
+
+    #save data
+    wf=open("dataarrays.pkl", 'wb')
+    pickle.dump(dataarrays, file=wf)
+    wf.close()
+
+    #save type
+    wf=open("set.pkl", 'wb')
+    pickle.dump(Yset, file=wf)
+    wf.close()
+
+if __name__ == '__main__':
+    dset = numpy.array([
+        [3,8,9,0],
+        [2,5,8,0],
+        [1,4,-18,0]
+    ])
+    dset = meaningful(dset)
+    print(dset)
