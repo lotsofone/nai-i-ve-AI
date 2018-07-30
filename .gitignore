@@ -1,10 +1,5 @@
 .idea
 __pycache__
-features
-<<<<<<< HEAD
-p1 features
-p2 PCA feature
-=======
 features_new
 features_binary
 p1 features
@@ -21,5 +16,3 @@ set.pkl
 SVM.pkl
 test_features.pkl
 test_features_answer.pkl
-
->>>>>>> 8bd4d2290c40583a04563f109f52ca5df79711ea
